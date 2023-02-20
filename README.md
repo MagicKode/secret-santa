@@ -33,4 +33,3 @@ commercial product
  - Although UI can be redone by another technology
  - JSP technology was used for performing task in estimate terms. 
 
-
