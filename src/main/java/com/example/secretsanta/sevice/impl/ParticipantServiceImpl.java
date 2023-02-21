@@ -21,17 +21,17 @@ public class ParticipantServiceImpl implements ParticipantService {
     @Override
     public synchronized ParticipantDto createParticipantDto(Participant participant) {
         participant.setId(participantAutoIncrementIndex++);
-        return participantMapper.toParticipantDto(participantMap.put(participant.getId(), participant));
+        participantMap.put(participant.getId(), participant);
+        return participantMapper.toParticipantDto(participantMap.get(participant.getId()));
     }
 
     @Override
     public ParticipantDto updateParticipantDto(Participant participant) {
         if (participantMap.isEmpty()) {
             throw new NotFoundException("No product updated with such id = " + participant.getId());
-        } else {
-            participantMap.put(participant.getId(), participant);
-            return participantMapper.toParticipantDto(participant);
         }
+        participantMap.put(participant.getId(), participant);
+        return participantMapper.toParticipantDto(participant);
     }
 
     @Override
@@ -39,9 +39,8 @@ public class ParticipantServiceImpl implements ParticipantService {
         Participant participant = participantMap.get(id);
         if (participant == null) {
             throw new NotFoundException("No product deleted with such id = " + id);
-        } else {
-            participantMap.remove(id);
         }
+        participantMap.remove(id);
     }
 
     @Override

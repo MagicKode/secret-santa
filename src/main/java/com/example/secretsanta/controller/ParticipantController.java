@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ParticipantController {
     private final ParticipantService participantService;
 
-    @GetMapping
+    @GetMapping(path = "/{id}")
     public ResponseEntity<ParticipantDto> get(@PathVariable Long id) {
         return new ResponseEntity<>(participantService.getById(id), HttpStatus.OK);
     }
